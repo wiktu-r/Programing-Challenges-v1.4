@@ -12,6 +12,7 @@ int main()
     int phone[9];
     phone[0] = rand()%9+1;
     std::string month;
+    int monthnr;
     int day;
     int year = rand()%80+1930;
 
@@ -28,7 +29,7 @@ int main()
         case 8: name = "Miłosz"; break;
         case 9: name = "Radek"; break;
         case 10: name = "Mirek"; break;
-        default: name = "Blad"; break;
+        default: name = "Error"; break;
     }
 
     switch(rand()%5+1)
@@ -38,86 +39,56 @@ int main()
         case 3: sname = "Pieprzyk"; break;
         case 4: sname = "Mielcarek"; break;
         case 5: sname = "Szulc"; break;
-        default: sname = "blad"; break;
+        default: sname = "Error"; break;
         
     }
 
     switch(rand()%12+1)
     {
-        case 1: month = "January"; break;
-        case 2: month = "February"; break;
-        case 3: month = "March"; break;
-        case 4: month = "April"; break;
-        case 5: month = "May"; break;
-        case 6: month = "June"; break;
-        case 7: month = "July"; break;
-        case 8: month = "August"; break;
-        case 9: month = "September"; break;
-        case 10: month = "October"; break;
-        case 11: month = "November"; break;
-        case 12: month = "December"; break;
+        case 1: {month = "January"; monthnr = 1;} break;
+        case 2: {month = "February"; monthnr = 2;} break;
+        case 3: {month = "March"; monthnr = 3;} break;
+        case 4: {month = "April"; monthnr = 4;} break;
+        case 5: {month = "May"; monthnr = 5;} break;
+        case 6: {month = "June"; monthnr = 6;} break;
+        case 7: {month = "July"; monthnr = 7;} break;
+        case 8: {month = "August"; monthnr = 8;} break;
+        case 9: {month = "September"; monthnr = 9;} break;
+        case 10: {month = "October"; monthnr = 10;} break;
+        case 11: {month = "November"; monthnr = 11;} break;
+        case 12: {month = "December"; monthnr = 12;} break;
+        default: "Error"; break;
     }
 
-    if(month == "January")
+    switch(monthnr)
     {
-        day = rand()%31+1;
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12: day = rand()%31+1; break;
+        case 4: 
+        case 6:
+        case 9:
+        case 11: day = rand()%30+1; break;   
+        case 2: 
+        {if((year%4 && !(year%100)) || year%400) 
+        day = rand()%29+1;
+        else 
+        day = rand()%28+1;}
+        break;
+        
+        default: "Error"; break;
     }
-    else if(month == "February")
-    {
-        if((year%4 && !(year%100)) || year%400)
-        {
-            day = rand()%29+1;
-        }
-        else
-        {
-            day = rand()%28+1;
-        }
-    }
-    else if(month == "March")
-    {
-        day = rand()%31+1;
-    }
-    else if(month == "April")
-    {
-        day = rand()%30+1;
-    }
-    else if(month == "May")
-    {
-        day = rand()%31+1;
-    }
-    else if(month == "June")
-    {
-        day = rand()%30+1;
-    }
-    else if(month == "July")
-    {
-        day = rand()%31+1;
-    }
-    else if(month == "August")
-    {
-        day = rand()%31+1;
-    }
-    else if(month == "September")
-    {
-        day = rand()%30+1;
-    }
-    else if(month == "October")
-    {
-        day = rand()%31+1;
-    }
-    else if(month == "November")
-    {
-        day = rand()%30+1;
-    }
-    else if(month == "December")
-    {
-        day = rand()%31+1;
-    }
+
 
     for(int i=1; i<=8; ++i)
     {
         phone[i] = rand()%10;
     }
+
 
     std::cout << "name: " << name << std::endl;    
     
@@ -127,7 +98,6 @@ int main()
     for(int i=0; i<=8; ++i)
     {std::cout << phone[i];}
     std::cout << std::endl;
-    
     std::cout << month << " " << day << " " << year; 
 
     getch();
